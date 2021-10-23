@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Sort Demo</string>
+    <string name="load_data">Load data</string>
+    <string name="sort">Sort</string>
+    <string name="clicked">Clicked %1$s</string>
+    <string name="empty_list">No content</string>
+</resources>
