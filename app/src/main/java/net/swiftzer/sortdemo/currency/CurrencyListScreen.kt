@@ -31,7 +31,6 @@ import java.util.*
 @Composable
 fun CurrencyListScreen(
     viewModel: CurrencyListViewModel,
-    onClickCurrency: (CurrencyInfo) -> Unit = {},
 ) {
     val currencies by viewModel.currencies.collectAsState()
 
@@ -57,7 +56,7 @@ fun CurrencyListScreen(
                 CurrencyListItem(
                     currency = currency,
                     showDivider = i != currencies.indices.last,
-                    onClick = { onClickCurrency(currency) },
+                    onClick = { viewModel.onClickCurrency(currency) },
                 )
             }
         }

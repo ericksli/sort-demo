@@ -12,15 +12,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import net.swiftzer.sortdemo.R
-import net.swiftzer.sortdemo.currency.CurrencyInfo
-import net.swiftzer.sortdemo.currency.CurrencyListCallback
 import net.swiftzer.sortdemo.currency.CurrencyListFragment
 import net.swiftzer.sortdemo.databinding.DemoActivityBinding
 
 private const val TAG_LIST = "list"
 
 @AndroidEntryPoint
-class DemoActivity : AppCompatActivity(), CurrencyListCallback {
+class DemoActivity : AppCompatActivity() {
     private val viewModel by viewModels<DemoViewModel>()
     private lateinit var binding: DemoActivityBinding
 
@@ -41,14 +39,14 @@ class DemoActivity : AppCompatActivity(), CurrencyListCallback {
         }
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.currencies.collect {
-                    fragment?.updateList(it)
+                viewModel.clickedCurrency.collect {
+                    Toast.makeText(
+                        this@DemoActivity,
+                        getString(R.string.clicked, it.name),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
-    }
-
-    override fun onClickCurrency(currency: CurrencyInfo) {
-        Toast.makeText(this, getString(R.string.clicked, currency.name), Toast.LENGTH_SHORT).show()
     }
 }
