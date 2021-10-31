@@ -38,7 +38,7 @@ class DemoActivity : AppCompatActivity() {
             }
         }
         lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.clickedCurrency.collect {
                     Toast.makeText(
                         this@DemoActivity,
